@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from 'react'
+import styled from 'styled-components/macro'
 
-import { WEIGHTS } from '../../constants';
-import { formatPrice, pluralize, isNewShoe } from '../../utils';
-import Spacer from '../Spacer';
+import { WEIGHTS } from '../../constants'
+import { formatPrice, pluralize, isNewShoe } from '../../utils'
+import Spacer from '../Spacer'
 
 const ShoeCard = ({
   slug,
@@ -36,20 +36,16 @@ const ShoeCard = ({
       <Wrapper>
         <ImageWrapper>
           <Image alt="" src={imageSrc} />
-          {variant === 'on-sale' && <SaleFlag>Sale</SaleFlag>}
-          {variant === 'new-release' && (
-            <NewFlag>Just released!</NewFlag>
-          )}
         </ImageWrapper>
+        {variant === 'on-sale' && <SaleFlag>Sale</SaleFlag>}
+        {variant === 'new-release' && <NewFlag>Just released!</NewFlag>}
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
           <Price
             style={{
               '--color':
-                variant === 'on-sale'
-                  ? 'var(--color-gray-700)'
-                  : undefined,
+                variant === 'on-sale' ? 'var(--color-gray-700)' : undefined,
               '--text-decoration':
                 variant === 'on-sale' ? 'line-through' : undefined,
             }}
@@ -65,49 +61,63 @@ const ShoeCard = ({
         </Row>
       </Wrapper>
     </Link>
-  );
-};
+  )
+}
 
 const Link = styled.a`
   text-decoration: none;
   color: inherit;
-`;
+`
 
-const Wrapper = styled.article``;
+const Wrapper = styled.article`
+  position: relative;
+`
 
 const ImageWrapper = styled.div`
-  position: relative;
-`;
+  overflow: clip;
+  border-radius: 16px 16px 4px 4px;
+`
 
 const Image = styled.img`
   width: 100%;
-  border-radius: 16px 16px 4px 4px;
-`;
+  display: block;
+  transition: transform 500ms;
+  transform-origin: 50% 75%;
+  will-change: transform;
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    ${Link}:hover &,
+    ${Link}:focus & {
+      transform: scale(1.1);
+      transition: transform 250ms;
+    }
+  }
+`
 
 const Row = styled.div`
   font-size: 1rem;
   display: flex;
   justify-content: space-between;
-`;
+`
 
 const Name = styled.h3`
   font-weight: ${WEIGHTS.medium};
   color: var(--color-gray-900);
-`;
+`
 
 const Price = styled.span`
   color: var(--color);
   text-decoration: var(--text-decoration);
-`;
+`
 
 const ColorInfo = styled.p`
   color: var(--color-gray-700);
-`;
+`
 
 const SalePrice = styled.span`
   font-weight: ${WEIGHTS.medium};
   color: var(--color-primary);
-`;
+`
 
 const Flag = styled.div`
   position: absolute;
@@ -121,13 +131,14 @@ const Flag = styled.div`
   font-weight: ${WEIGHTS.bold};
   color: var(--color-white);
   border-radius: 2px;
-`;
+`
 
 const SaleFlag = styled(Flag)`
   background-color: var(--color-primary);
-`;
+`
+
 const NewFlag = styled(Flag)`
   background-color: var(--color-secondary);
-`;
+`
 
-export default ShoeCard;
+export default ShoeCard

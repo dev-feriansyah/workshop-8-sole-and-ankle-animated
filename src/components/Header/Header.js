@@ -21,8 +21,12 @@ const Header = () => {
           <Logo />
         </LogoWrapper>
         <DesktopNav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
+          <NavLink animationType="flipUp" href="/sale">
+            Sale
+          </NavLink>
+          <NavLink animationType="flipUp" href="/new">
+            New&nbsp;Releases
+          </NavLink>
           <NavLink href="/men">Men</NavLink>
           <NavLink href="/women">Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>

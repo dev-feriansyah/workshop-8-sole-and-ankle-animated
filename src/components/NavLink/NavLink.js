@@ -1,13 +1,32 @@
 import styled from 'styled-components/macro'
 import { WEIGHTS } from '../../constants'
 
-const NavLink = ({ children, ...delegated }) => {
+const ANIMATION_TYPE = {
+  flipUp: 'flipUp',
+  selection: 'selection',
+}
+
+const ANIMATION_TYPE_DEFAULT = ANIMATION_TYPE.selection
+
+const NavLink = ({ animationType = ANIMATION_TYPE_DEFAULT, ...delegated }) => {
+  if (animationType === ANIMATION_TYPE.selection) {
+    return <SelectionLink {...delegated} />
+  }
+
+  return <FlipUpLink {...delegated} />
+}
+
+const FlipUpLink = ({ children, ...delegated }) => {
   return (
     <Wrapper {...delegated}>
       <MainText>{children}</MainText>
       <HoverText aria-hidden>{children}</HoverText>
     </Wrapper>
   )
+}
+
+const SelectionLink = ({ children, ...delegated }) => {
+  return <SelectionLinkWrapper {...delegated}>{children}</SelectionLinkWrapper>
 }
 
 const Wrapper = styled.a`
@@ -23,6 +42,42 @@ const Wrapper = styled.a`
 
   &:first-of-type {
     color: var(--color-secondary);
+  }
+`
+
+const SelectionLinkWrapper = styled(Wrapper)`
+  overflow: revert;
+
+  &::before,
+  &::after {
+    display: inline-block;
+    position: absolute;
+    transform: translateX(var(--translate-from));
+    opacity: 0;
+    transition: transform 500ms, opacity 250ms;
+  }
+
+  &::before {
+    content: '[';
+    left: 0;
+    --translate-from: 0;
+    --translate-to: -16px;
+  }
+
+  &::after {
+    content: ']';
+    right: 0;
+    --translate-from: 0;
+    --translate-to: 16px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    &:hover&::before,
+    &:hover&::after {
+      transform: translateX(var(--translate-to));
+      opacity: 1;
+      transition: transform 250ms, opacity 750ms;
+    }
   }
 `
 

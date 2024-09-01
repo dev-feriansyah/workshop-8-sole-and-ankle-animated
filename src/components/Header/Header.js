@@ -1,16 +1,17 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from 'react'
+import styled from 'styled-components/macro'
 
-import { QUERIES, WEIGHTS } from '../../constants';
-import Logo from '../Logo';
-import Icon from '../Icon';
-import UnstyledButton from '../UnstyledButton';
-import SuperHeader from '../SuperHeader';
-import MobileMenu from '../MobileMenu';
-import VisuallyHidden from '../VisuallyHidden';
+import { QUERIES } from '../../constants'
+import Logo from '../Logo'
+import Icon from '../Icon'
+import UnstyledButton from '../UnstyledButton'
+import SuperHeader from '../SuperHeader'
+import MobileMenu from '../MobileMenu'
+import VisuallyHidden from '../VisuallyHidden'
+import NavLink from '../NavLink'
 
 const Header = () => {
-  const [showMobileMenu, setShowMobileMenu] = React.useState(false);
+  const [showMobileMenu, setShowMobileMenu] = React.useState(false)
 
   return (
     <header>
@@ -49,8 +50,8 @@ const Header = () => {
         onDismiss={() => setShowMobileMenu(false)}
       />
     </header>
-  );
-};
+  )
+}
 
 const MainHeader = styled.div`
   display: flex;
@@ -69,7 +70,7 @@ const MainHeader = styled.div`
     padding-left: 16px;
     padding-right: 16px;
   }
-`;
+`
 
 const DesktopNav = styled.nav`
   display: flex;
@@ -79,7 +80,7 @@ const DesktopNav = styled.nav`
   @media ${QUERIES.tabletAndSmaller} {
     display: none;
   }
-`;
+`
 
 const MobileActions = styled.div`
   display: none;
@@ -92,7 +93,7 @@ const MobileActions = styled.div`
   @media ${QUERIES.phoneAndSmaller} {
     gap: 16px;
   }
-`;
+`
 
 const LogoWrapper = styled.div`
   flex: 1;
@@ -100,11 +101,11 @@ const LogoWrapper = styled.div`
   @media ${QUERIES.tabletAndSmaller} {
     flex: revert;
   }
-`;
+`
 
 const ShoppingBagButton = styled(UnstyledButton)`
   transform: translateX(-2px);
-`;
+`
 
 const Filler = styled.div`
   flex: 1;
@@ -112,18 +113,6 @@ const Filler = styled.div`
   @media ${QUERIES.tabletAndSmaller} {
     display: none;
   }
-`;
+`
 
-const NavLink = styled.a`
-  font-size: 1.125rem;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--color-gray-900);
-  font-weight: ${WEIGHTS.medium};
-
-  &:first-of-type {
-    color: var(--color-secondary);
-  }
-`;
-
-export default Header;
+export default Header
